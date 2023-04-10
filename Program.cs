@@ -16,7 +16,7 @@ namespace otk
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DataUploadForm());
+            Application.Run(new Registration());
         }
     }
 }

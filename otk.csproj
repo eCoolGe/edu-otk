@@ -78,6 +78,7 @@
       <DependentUpon>Registration.cs</DependentUpon>
     </Compile>
     <Compile Include="RowOfData.cs" />
+    <Compile Include="User.cs" />
     <EmbeddedResource Include="DataForm.resx">
       <DependentUpon>DataForm.cs</DependentUpon>
     </EmbeddedResource>
