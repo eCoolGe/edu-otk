@@ -64,6 +64,7 @@
             this.labelGoToRegistration.Size = new System.Drawing.Size(170, 29);
             this.labelGoToRegistration.TabIndex = 4;
             this.labelGoToRegistration.Text = "Регистрация";
+            this.labelGoToRegistration.Click += new System.EventHandler(this.labelGoToRegistration_Click);
             // 
             // buttonAutorization
             // 
@@ -74,6 +75,7 @@
             this.buttonAutorization.TabIndex = 3;
             this.buttonAutorization.Text = "Вход";
             this.buttonAutorization.UseVisualStyleBackColor = true;
+            this.buttonAutorization.Click += new System.EventHandler(this.buttonAutorization_Click);
             // 
             // textBoxPassword
             // 
