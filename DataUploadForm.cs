@@ -41,20 +41,25 @@ namespace otk
             column4.HeaderText = "Сроки";
             column4.Width = 120;
             column4.Name = "time_constraints";
+            //column4.DefaultCellStyle.Format = "yyyy-MM-dd";
+
             column4.CellTemplate = new DataGridViewTextBoxCell();
+            
 
             dataGridView1.Columns.Add(column1);
             dataGridView1.Columns.Add(column2);
             dataGridView1.Columns.Add(column3);
             dataGridView1.Columns.Add(column4);
 
+            
+
             dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.ReadOnly = true;
+            //dataGridView1.ReadOnly = true;
         }
 
         private void AddDataGrid(RowOfData row)
         {
-            dataGridView1.Rows.Add(row.id, row.specification, row.information, row.time_constraints);
+            dataGridView1.Rows.Add(row.id, row.specification, row.information, DateTime.Parse($"{row.time_constraints}").ToString("yyyy-MM-dd"));
         }
 
         public DataUploadForm()
@@ -220,11 +225,11 @@ namespace otk
                             string time_constraints = Convert.ToString(this.dataGridView1.Rows[0].Cells[3].Value);
 
                             DatabaseManager _databaseManager = new DatabaseManager();
-                            string _commandString = "UPDATE `projects` SET `id` = '" + id + "', " +
-                                "`specification` = '" + specification + "', " +
-                                "`information` = '" + information + "', " +
-                                "`time_constraints = '" + time_constraints + "' " +
-                                "WHERE `projects`.`id` = " + id;
+                            string _commandString = $"UPDATE `projects` SET `id` = '{id}', " +
+                                $"`specification` = '{specification}', " +
+                                $"`information` = '{information}', " +
+                                $"`time_constraints` = '{time_constraints}' " +
+                                "WHERE projects.id = " + id + ";";
                             MySqlCommand _command = new MySqlCommand(_commandString, _databaseManager.GetConnection);
 
                             try
@@ -258,11 +263,11 @@ namespace otk
                                 string information = Convert.ToString(this.dataGridView1.Rows[0].Cells[2].Value);
                                 string time_constraints = Convert.ToString(this.dataGridView1.Rows[0].Cells[3].Value);
 
-                                string _commandString = "UPDATE `projects` SET `id` = '" + id + "', " +
-                                "`specification` = '" + specification + "', " +
-                                "`information` = '" + information + "', " +
-                                "`time_constraints = '" + time_constraints + "' " +
-                                "WHERE `projects`.`id` = " + id;
+                                string _commandString = $"UPDATE `projects` SET `id` = '{id}', " +
+                                $"`specification` = '{specification}', " +
+                                $"`information` = '{information}', " +
+                                $"`time_constraints` = '{time_constraints}' " +
+                                "WHERE projects.id = " + id + ";";
                                 MySqlCommand _command = new MySqlCommand(_commandString, _databaseManager.GetConnection);
 
                                 try
