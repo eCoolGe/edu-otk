@@ -46,6 +46,9 @@
             this.numericUpDownForAdd = new System.Windows.Forms.NumericUpDown();
             this.labelForSelected = new System.Windows.Forms.Label();
             this.labelForAdd = new System.Windows.Forms.Label();
+            this.загрузитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выгрузитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.изменитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBoxSettings.SuspendLayout();
@@ -90,7 +93,10 @@
             // 
             this.действияToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.обновитьДанныеToolStripMenuItem,
-            this.редактироватьДанныеToolStripMenuItem});
+            this.редактироватьДанныеToolStripMenuItem,
+            this.загрузитьДанныеToolStripMenuItem,
+            this.выгрузитьДанныеToolStripMenuItem,
+            this.изменитьДанныеToolStripMenuItem});
             this.действияToolStripMenuItem.Name = "действияToolStripMenuItem";
             this.действияToolStripMenuItem.Size = new System.Drawing.Size(88, 24);
             this.действияToolStripMenuItem.Text = "Действия";
@@ -164,6 +170,7 @@
             this.buttonChoose.TabIndex = 2;
             this.buttonChoose.Text = "Выбрать";
             this.buttonChoose.UseVisualStyleBackColor = true;
+            this.buttonChoose.Click += new System.EventHandler(this.buttonChoose_Click);
             // 
             // buttonCreate
             // 
@@ -173,6 +180,7 @@
             this.buttonCreate.TabIndex = 2;
             this.buttonCreate.Text = "Создать";
             this.buttonCreate.UseVisualStyleBackColor = true;
+            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
             // 
             // numericUpDownForSelected
             // 
@@ -226,6 +234,27 @@
             this.labelForAdd.TabIndex = 0;
             this.labelForAdd.Text = "Количество добавляемых данных:";
             // 
+            // загрузитьДанныеToolStripMenuItem
+            // 
+            this.загрузитьДанныеToolStripMenuItem.Name = "загрузитьДанныеToolStripMenuItem";
+            this.загрузитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(251, 26);
+            this.загрузитьДанныеToolStripMenuItem.Text = "Загрузить данные";
+            this.загрузитьДанныеToolStripMenuItem.Click += new System.EventHandler(this.загрузитьДанныеToolStripMenuItem_Click);
+            // 
+            // выгрузитьДанныеToolStripMenuItem
+            // 
+            this.выгрузитьДанныеToolStripMenuItem.Name = "выгрузитьДанныеToolStripMenuItem";
+            this.выгрузитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(251, 26);
+            this.выгрузитьДанныеToolStripMenuItem.Text = "Выгрузить данные";
+            this.выгрузитьДанныеToolStripMenuItem.Click += new System.EventHandler(this.выгрузитьДанныеToolStripMenuItem_Click);
+            // 
+            // изменитьДанныеToolStripMenuItem
+            // 
+            this.изменитьДанныеToolStripMenuItem.Name = "изменитьДанныеToolStripMenuItem";
+            this.изменитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(251, 26);
+            this.изменитьДанныеToolStripMenuItem.Text = "Изменить данные";
+            this.изменитьДанныеToolStripMenuItem.Click += new System.EventHandler(this.изменитьДанныеToolStripMenuItem_Click);
+            // 
             // DataUploadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -240,6 +269,7 @@
             this.MinimumSize = new System.Drawing.Size(900, 600);
             this.Name = "DataUploadForm";
             this.Text = "DataUploadForm";
+            this.Shown += new System.EventHandler(this.DataUploadForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -272,5 +302,8 @@
         private System.Windows.Forms.NumericUpDown numericUpDownForAdd;
         private System.Windows.Forms.Label labelForSelected;
         private System.Windows.Forms.Label labelForAdd;
+        private System.Windows.Forms.ToolStripMenuItem загрузитьДанныеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem выгрузитьДанныеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem изменитьДанныеToolStripMenuItem;
     }
 }

@@ -70,12 +70,14 @@
             this.обновитьДанныеToolStripMenuItem.Name = "обновитьДанныеToolStripMenuItem";
             this.обновитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(251, 26);
             this.обновитьДанныеToolStripMenuItem.Text = "Обновить данные";
+            this.обновитьДанныеToolStripMenuItem.Click += new System.EventHandler(this.обновитьДанныеToolStripMenuItem_Click);
             // 
             // редактироватьДанныеToolStripMenuItem
             // 
             this.редактироватьДанныеToolStripMenuItem.Name = "редактироватьДанныеToolStripMenuItem";
             this.редактироватьДанныеToolStripMenuItem.Size = new System.Drawing.Size(251, 26);
             this.редактироватьДанныеToolStripMenuItem.Text = "Редактировать данные";
+            this.редактироватьДанныеToolStripMenuItem.Click += new System.EventHandler(this.редактироватьДанныеToolStripMenuItem_Click);
             // 
             // выходToolStripMenuItem
             // 
@@ -92,24 +94,28 @@
             this.выходИзПрограммыToolStripMenuItem.Name = "выходИзПрограммыToolStripMenuItem";
             this.выходИзПрограммыToolStripMenuItem.Size = new System.Drawing.Size(279, 26);
             this.выходИзПрограммыToolStripMenuItem.Text = "Выход из программы";
+            this.выходИзПрограммыToolStripMenuItem.Click += new System.EventHandler(this.выходИзПрограммыToolStripMenuItem_Click);
             // 
             // выходВОкноРегистрацииToolStripMenuItem
             // 
             this.выходВОкноРегистрацииToolStripMenuItem.Name = "выходВОкноРегистрацииToolStripMenuItem";
             this.выходВОкноРегистрацииToolStripMenuItem.Size = new System.Drawing.Size(279, 26);
             this.выходВОкноРегистрацииToolStripMenuItem.Text = "Выход в окно регистрации";
+            this.выходВОкноРегистрацииToolStripMenuItem.Click += new System.EventHandler(this.выходВОкноРегистрацииToolStripMenuItem_Click);
             // 
             // выходВОкноВходаToolStripMenuItem
             // 
             this.выходВОкноВходаToolStripMenuItem.Name = "выходВОкноВходаToolStripMenuItem";
             this.выходВОкноВходаToolStripMenuItem.Size = new System.Drawing.Size(279, 26);
             this.выходВОкноВходаToolStripMenuItem.Text = "Выход в окно входа";
+            this.выходВОкноВходаToolStripMenuItem.Click += new System.EventHandler(this.выходВОкноВходаToolStripMenuItem_Click);
             // 
             // оПрограммеToolStripMenuItem
             // 
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
             this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(118, 24);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
+            this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
             // 
             // labelHeader
             // 
@@ -145,6 +151,7 @@
             this.MinimumSize = new System.Drawing.Size(900, 600);
             this.Name = "DataForm";
             this.Text = "DataForm";
+            this.Shown += new System.EventHandler(this.DataForm_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
