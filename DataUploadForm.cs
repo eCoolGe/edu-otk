@@ -66,7 +66,7 @@ namespace otk
         {
             HeaderOfTheTable();
             dataGridView1.Columns[0].ReadOnly = true;
-            User user = new User();
+            user = new User();
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
@@ -167,6 +167,8 @@ namespace otk
                 {
                     bool add = true;
 
+                    _databaseManager.OpenConnection();
+
                     for (int i = 0; i < dataGridView1.Rows.Count; i++)
                     {
                         if (Convert.ToString(this.dataGridView1.Rows[i].Cells[1].Value) != "" && Convert.ToString(this.dataGridView1.Rows[i].Cells[2].Value) != "" && Convert.ToString(this.dataGridView1.Rows[i].Cells[3].Value) != "")
@@ -240,17 +242,181 @@ namespace otk
                                 _databaseManager.CloseConnection();
                             }
                         }
-                        
-                        
                     }
                     else
                     {
+                        DatabaseManager _databaseManager = new DatabaseManager();
+                        _databaseManager.OpenConnection();
+                        bool changed = true;
 
+                        for (int i = 0; i < dataGridView1.SelectedRows.Count; i++)
+                        {
+                            if (Convert.ToString(this.dataGridView1.Rows[i].Cells[1].Value) != "" && Convert.ToString(this.dataGridView1.Rows[i].Cells[2].Value) != "" && Convert.ToString(this.dataGridView1.Rows[i].Cells[3].Value) != "")
+                            {
+                                string id = Convert.ToString(this.dataGridView1.Rows[0].Cells[0].Value);
+                                string specification = Convert.ToString(this.dataGridView1.Rows[0].Cells[1].Value);
+                                string information = Convert.ToString(this.dataGridView1.Rows[0].Cells[2].Value);
+                                string time_constraints = Convert.ToString(this.dataGridView1.Rows[0].Cells[3].Value);
+
+                                string _commandString = "UPDATE `projects` SET `id` = '" + id + "', " +
+                                "`specification` = '" + specification + "', " +
+                                "`information` = '" + information + "', " +
+                                "`time_constraints = '" + time_constraints + "' " +
+                                "WHERE `projects`.`id` = " + id;
+                                MySqlCommand _command = new MySqlCommand(_commandString, _databaseManager.GetConnection);
+
+                                try
+                                {
+                                    if (_command.ExecuteNonQuery() != 1)
+                                        changed = false;
+                                }
+                                catch
+                                {
+                                    MessageBox.Show("Ошибка работы с базой данных", "Ошибка!");
+                                }
+                            }
+                            else
+                                MessageBox.Show("Не все поля заполнены", "Внимание!");
+                        }
+
+                        if (changed)
+                            MessageBox.Show("Данные изменены", "Внимание");
+                        else
+                            MessageBox.Show("Не все данные изменены", "Внимание!");
+                        _databaseManager.CloseConnection();
                     }
                 }
                 else
                     MessageBox.Show("Ошибка, у вас нет на это доступа!", "Ошибка!");
             }
+        }
+
+        private void выбранныйыеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Точно удалить эти данные?", "Внимание!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                if (dataGridView1.SelectedRows.Count == 0)
+                {
+                    int index = Convert.ToInt32(numericUpDownForSelected.Value);
+                    if (index > 0 && index <= _data.Count)
+                    {
+                        DatabaseManager _databaseManager = new DatabaseManager();
+                        string id = Convert.ToString(this.dataGridView1.Rows[0].Cells[0].Value);
+                        string _commandString = "DELETE FROM `projects` WHERE `projects`.`id` = " + id;
+                        MySqlCommand _command = new MySqlCommand(_commandString, _databaseManager.GetConnection);
+
+                        try
+                        {
+                            _databaseManager.OpenConnection();
+                            _command.ExecuteNonQuery();
+                            MessageBox.Show("Данные удалены успешно", "Внимание!");
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Ошибка работы с базой данных", "Ошибка!");
+                        }
+                        finally
+                        {
+                            _databaseManager.CloseConnection();
+                        }
+                    }
+                }
+                else
+                    MessageBox.Show("Выбран неверный элемент", "Ошибка!");
+            }
+            else
+            {
+                DatabaseManager _databaseManager = new DatabaseManager();
+                _databaseManager.OpenConnection();
+                bool delete = true;
+
+                foreach(DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    string id = Convert.ToString(row.Cells[0].Value);
+                    string _commandString = "DELETE FROM `projects` WHERE `project`.`id` = " + id;
+                    MySqlCommand _command = new MySqlCommand(_commandString, _databaseManager.GetConnection);
+
+                    try
+                    {
+                        dataGridView1.Rows.Remove(row);
+                        if (_command.ExecuteNonQuery() != 1)
+                            delete = false;
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Ошибка работы с базой данных", "Ошибка!");
+                    }
+                }
+
+                if (delete)
+                    MessageBox.Show("Выбранные данные успешно удалены", "Внимание!");
+                else
+                    MessageBox.Show("Не все выбранные данные были удалены", "Внимание!");
+
+                _databaseManager.CloseConnection();
+            }
+        }
+
+        private void всеДанныеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (user.userName == "admin" || user.userName == "love")
+            {
+                if (MessageBox.Show("Точно удалить ВСЕ данные?", "Внимание!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    DatabaseManager _databaseManager = new DatabaseManager();
+                    MySqlCommand _command = new MySqlCommand("TRUNCATE TABLE `projects`", _databaseManager.GetConnection);
+
+                    try
+                    {
+                        _databaseManager.OpenConnection();
+                        _command.ExecuteNonQuery();
+                        MessageBox.Show("Все данные были успешно удалены", "Внимание!");
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Ошибка удаления данных", "Ошибка!");
+                    }
+                    finally
+                    {
+                        _databaseManager.CloseConnection();
+                    }
+                }
+            }
+            else
+                MessageBox.Show("Ошибка, у вас нет на это доступа", "Ошибка!");
+        }
+
+        private void перейтиКПросмотруДанныхToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataForm form = new DataForm();
+            this.Hide();
+            form.Show();
+        }
+
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Данная программа демонстрирует возможности работы с WindowsForms, C# и MySQL. \n" +
+                "А так же пример создания базы данных на основе этих инструментов. \n" +
+                "Данное окно показывает возможность отображения данных, загруженных с сервера", "Информация о программе");
+        }
+
+        private void выходИзПрограммыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void выходВОкноРегистрацииToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Registration form = new Registration();
+            this.Hide();
+            form.Show();
+        }
+
+        private void выходВОкноВходаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Autorization form = new Autorization();
+            this.Hide();
+            form.Show();
         }
     }
 }
